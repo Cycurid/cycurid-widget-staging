@@ -12,7 +12,8 @@ async function immeCompleteOauth(data, onSuccess, onFailure) {
     checkParams(data, onSuccess, onFailure);
     const widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&redirect_url=${data.redirect_url}&scope=${data.scope}&action=${data.action}`;
     window.open(widget);
-    window.addEventListener("message", async (event) => {
+
+    window.addEventListener("message", async function listenForMessage(event) {
       if (event.origin !== IMMEWIDGET_URL) {
         return;
       } else {
@@ -25,24 +26,9 @@ async function immeCompleteOauth(data, onSuccess, onFailure) {
           onFailure(token);
         } else {
           const userInfo = await getUserInfo(token.access_token);
-          onSuccess(userInfo);
-
-          const refresh_token = await refreshToken({
-            token: token.refresh_token,
-            client_id: data.client_id,
-            client_secret: data.client_secret,
-          });
-
-          console.log(refresh_token);
-
-          const revoke_token = await revokeToken({
-            token: refresh_token.access_token,
-            client_id: data.client_id,
-            client_secret: data.client_secret,
-          });
-
-          console.log(revoke_token);
+          onSuccess(userInfo, token);
         }
+        window.removeEventListener("message", listenForMessage);
       }
     });
   } catch (error) {
@@ -50,7 +36,23 @@ async function immeCompleteOauth(data, onSuccess, onFailure) {
   }
 }
 
-// error handling on getuserinfo <=========
+async function immeLogout(token, client_id, client_secret) {
+  try {
+    if (typeof token !== "string" || !token) {
+      throw "token is required and it must be a string";
+    } else if (typeof client_id !== "string" || !client_id) {
+      throw "client_id is required and it must be a string";
+    } else if (typeof client_secret !== "string" || !client_secret) {
+      throw "client_secret is required and it must be a string";
+    } else {
+      return await revokeToken({
+        token,
+        client_id,
+        client_secret,
+      });
+    }
+  } catch (error) {}
+}
 
 async function getCode(data, onSuccess, onFailure) {
   try {
@@ -287,4 +289,5 @@ module.exports = {
   getToken,
   refreshToken,
   revokeToken,
+  immeLogout,
 };
