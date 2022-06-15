@@ -1,6 +1,7 @@
 const Buffer = require("buffer/").Buffer;
 const fetch = require("node-fetch");
 const FormData = require("form-data");
+const { OAUTH_SERVER } = require("./constants");
 
 module.exports = async function getToken(code, clientID, clientSecret) {
   try {
@@ -22,7 +23,7 @@ module.exports = async function getToken(code, clientID, clientSecret) {
       headers: myHeaders,
       body: formdata,
     };
-    await fetch(`${process.env.OAUTH_SERVER}/oauth/token`, requestOptions)
+    await fetch(`${OAUTH_SERVER}/oauth/token`, requestOptions)
       .then((response) => {
         console.log("response 1: ", response);
         response.text();

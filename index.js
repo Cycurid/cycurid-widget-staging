@@ -3,11 +3,9 @@ const checkParams = require("./src/checkParams");
 const Buffer = require("buffer/").Buffer;
 const fetch = require("node-fetch");
 const FormData = require("form-data");
+const { OAUTH_SERVER, IMMEWIDGET_URL } = require("./src/constants");
 
-const OAUTH_SERVER = "https://api.cycurid.com";
-const IMMEWIDGET_URL = `http://localhost:3000`;
-
-async function immeCompleteOauth(data, onSuccess, onFailure) {
+async function immeOauth(data, onSuccess, onFailure) {
   try {
     checkParams(data, onSuccess, onFailure);
     const widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&redirect_url=${data.redirect_url}&scope=${data.scope}&action=${data.action}`;
@@ -283,7 +281,7 @@ async function refreshToken(data) {
 }
 
 module.exports = {
-  immeCompleteOauth,
+  immeOauth,
   getCode,
   getUserInfo,
   getToken,
