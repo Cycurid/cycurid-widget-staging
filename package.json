@@ -1,6 +1,6 @@
 {
   "name": "cycurid-widget-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Oauth",
   "main": "index.js",
   "scripts": {
