@@ -1,0 +1,21 @@
+{
+  "name": "cycurid-widget-js",
+  "version": "1.0.2",
+  "description": "Oauth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cycurid-widget-js"
+  ],
+  "author": "Francis Tan",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "buffer": "^6.0.3",
+    "dotenv": "^16.0.0",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}
