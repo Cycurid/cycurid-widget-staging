@@ -11,8 +11,8 @@ module.exports = function checkParams(data, onSuccess, onFailure) {
     if (!data.client_secret) {
       throw { statusText: "client_secret is required" };
     }
-    if (!data.redirect_url) {
-      throw { statusText: "redirect_url is required" };
+    if (!data.origin_url) {
+      throw { statusText: "origin_url is required" };
     }
     if (!data.scope) {
       throw { statusText: "scope is required" };
@@ -25,7 +25,7 @@ module.exports = function checkParams(data, onSuccess, onFailure) {
       throw { statusText: "onFailure function is required" };
     }
 
-    // const valid = isValidHttpUrl(data.redirect_url);
+    // const valid = isValidHttpUrl(data.origin_url);
 
     // if (valid) {
     //   return true;
