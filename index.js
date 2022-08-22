@@ -8,7 +8,13 @@ const { OAUTH_SERVER, IMMEWIDGET_URL } = require("./src/constants");
 async function immeOauth(data, onSuccess, onFailure) {
   try {
     checkParams(data, onSuccess, onFailure);
-    const widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${data.scope}&action=${data.action}`;
+    const scopeString = data.scope.join(" ");
+    if (data.entity_name) {
+      widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${scopeString}&entity_name=${data.entity_name}&action=${data.action}`;
+    } else {
+      widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${scopeString}&action=${data.action}`;
+    }
+
     window.open(widget);
 
     window.addEventListener("message", async function listenForMessage(event) {
@@ -23,7 +29,7 @@ async function immeOauth(data, onSuccess, onFailure) {
         if (token.status && token.status !== 200) {
           onFailure(token);
         } else {
-          const userInfo = await getUserInfo(token.access_token);
+          const userInfo = await getUserInfo(token.access_token, token.scope);
           onSuccess(userInfo, token);
         }
         window.removeEventListener("message", listenForMessage);
@@ -55,7 +61,11 @@ async function immeLogout(token, client_id, client_secret) {
 async function getCode(data, onSuccess, onFailure) {
   try {
     checkParams(data, onSuccess, onFailure);
-    const widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${data.scope}&action=${data.action}`;
+    if (data.entity_name) {
+      widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${scopeString}&entity_name=${data.entity_name}&action=${data.action}`;
+    } else {
+      widget = `${IMMEWIDGET_URL}?client_id=${data.client_id}&origin_url=${data.origin_url}&scope=${scopeString}&action=${data.action}`;
+    }
     window.open(widget);
     window.addEventListener("message", async (event) => {
       if (event.origin !== IMMEWIDGET_URL) {
@@ -137,8 +147,7 @@ async function getUserInfo(token) {
     }
     return await axiosRequest(
       "get",
-      // `${OAUTH_SERVER}/oauth/userinfo`,
-      `${OAUTH_SERVER}/v1/public/users/resources/get_info`,
+      `${OAUTH_SERVER}/oauth/userinfo`,
       {},
       {
         Authorization: `Bearer ${token}`,
