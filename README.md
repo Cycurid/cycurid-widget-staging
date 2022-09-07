@@ -53,7 +53,15 @@ This is your configuration object for the client. The config is passed into each
 - **client_id** - The ID provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **client_secret** - The Secret provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **origin_url** - This is the URL that the request is initially used to initiate the OAuth process. This URL needs to match the provided URL associated with the client account. The widget response will be sent to this address.
--  **scopes** -  An array of what user information you want to be returned. Currently, only user's 'uuid' will be returned. 
+-  **scopes** -  An array of what user information you want to be returned.
+```javascript
+[reference_uuid, email, phone, first_name, last_name, middle_name, dob, sex, nationality, address, address1, address2, city, state, zip, country, passport_number, passport_exp, passport_issuing, passport_issuing_country]
+```
+### Demo Repository and Site
+[Imme Demo Website Github](https://github.com/Cycurid/Demo-Website)
+
+[Imme Live Demo Website](https://imme-demo-website.vercel.app/)
+
 
 ## Account Creation
 *An Cycurid Account is required to use this package*
