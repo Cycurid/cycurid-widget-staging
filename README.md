@@ -31,6 +31,7 @@ const config = {
   client_secret: '<YOUR_CLIENT_SECRET>',
   origin_url: '<YOUR_ORIGIN_URL>',
   scopes: ['<YOUR_SCOPES_ARRAY>'],
+  entity_name: '<YOUR_ENTITY_NAME>'
 };
 
 const onSuccess = (userInfo, token) => {<YOUR_ONSUCCESS_FUNCTION>}
@@ -53,10 +54,12 @@ This is your configuration object for the client. The config is passed into each
 - **client_id** - The ID provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **client_secret** - The Secret provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **origin_url** - This is the URL that the request is initially used to initiate the OAuth process. This URL needs to match the provided URL associated with the client account. The widget response will be sent to this address.
+-  **entity_name** -  OPTIONAL_KEY, this will change the name displayed on the widget.
 -  **scopes** -  An array of what user information you want to be returned.
 ```javascript
-[reference_uuid, email, phone, first_name, last_name, middle_name, dob, sex, nationality, address, address1, address2, city, state, zip, country, passport_number, passport_exp, passport_issuing, passport_issuing_country]
+[reference_uuid, email, phone, first_name, last_name, middle_name, dob]
 ```
+ 
 ### Demo Repository and Site
 [Imme Demo Website Github](https://github.com/Cycurid/Demo-Website)
 
