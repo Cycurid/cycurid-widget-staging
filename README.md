@@ -13,7 +13,9 @@ npm install cycurid-widget-js
 ## Usage
 
 ### Import
+
 IMPORT IN REACT:
+
 ```javascript
 import { immeOauth, immeLogout } from "cycurid-widget-js";
 ```
@@ -21,7 +23,9 @@ import { immeOauth, immeLogout } from "cycurid-widget-js";
 ### Supported methods
 
 #### immeOauth
+
 This is the main function to use for authentication. Invoking this function will do the whole login flow and generate an access token, refresh token and access token expiry date. The token is then used to fetch the specified scope after successful login and verification by the user.
+
 ```javascript
 import { immeOauth } from 'cycurid-widget-js';
 
@@ -39,44 +43,52 @@ const onFailure = (token) => {<YOUR_ONFAILURE_FUNCTION>}
 
 const result = await immeOauth(config,onSuccess,onFailure);
 ```
+
 #### immeLogout
+
 This function will revoke the OAuth token.
+
 ```javascript
-import { immeLogout } from 'cycurid-widget-js';
+import { immeLogout } from "cycurid-widget-js";
 
 const logout = await immeLogout(token, client_id, client_secret);
 ```
 
 ### config
+
 This is your configuration object for the client. The config is passed into each of the methods with optional overrides.
 
-- **action** - This specifies the objective that you want the user to accomplish currently, we support 'login' and 'register'. 
+- **action** - This specifies the objective that you want the user to accomplish currently, we support 'login' and 'register'.
 - **client_id** - The ID provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **client_secret** - The Secret provided to you from [CycurID Portal Website](https://portal.cycurid.com/) see [Account Creation](#account-creation) for more details.
 - **origin_url** - This is the URL that the request is initially used to initiate the OAuth process. This URL needs to match the provided URL associated with the client account. The widget response will be sent to this address.
--  **entity_name** -  OPTIONAL_KEY, this will change the name displayed on the widget.
--  **scopes** -  An array of what user information you want to be returned.
+- **entity_name** - OPTIONAL_KEY, this will change the name displayed on the widget.
+- **scopes** - An array of what user information you want to be returned.
+
 ```javascript
-[reference_uuid, email, phone, first_name, last_name, middle_name, dob]
+[reference_uuid, email, phone, first_name, last_name, middle_name, dob];
 ```
- 
+
 ### Demo Repository and Site
-[Imme Demo Website Github](https://github.com/Cycurid/Demo-Website)
+
+[Imme Demo Website Github](https://github.com/Cycurid/demo-website-production)
 
 [Imme Live Demo Website](https://demo-website-production.vercel.app/)
 
-
 ## Account Creation
-*An Cycurid Account is required to use this package*
 
-To create an account, navigate to [CycurID Portal Website](https://portal.cycurid.com/) and click Create An Account to start verifying users' identity with CycurID. 
+_An Cycurid Account is required to use this package_
+
+To create an account, navigate to [CycurID Portal Website](https://portal.cycurid.com/) and click Create An Account to start verifying users' identity with CycurID.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 MIT License
 
 Copyright (c) 2022 CycurID
