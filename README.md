@@ -63,7 +63,7 @@ This is your configuration object for the client. The config is passed into each
 ### Demo Repository and Site
 [Imme Demo Website Github](https://github.com/Cycurid/Demo-Website)
 
-[Imme Live Demo Website](https://imme-demo-website.vercel.app/)
+[Imme Live Demo Website](https://demo-website-production.vercel.app/)
 
 
 ## Account Creation
